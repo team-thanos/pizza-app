@@ -1,0 +1,61 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Einkaufswagen</ion-title>
+        <ion-buttons right>
+	        <button ion-button icon-only clear color="dark" [disabled]="orderItemList && orderItemList.length == 0" (click)="checkoutTapped($event)">
+	            <ion-icon name="exit"></ion-icon> Bestellen
+	        </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+    <ion-card *ngIf="orderItemList && orderItemList.length == 0">
+        <ion-card-header>Dein Einkaufswagen ist leer.</ion-card-header>
+        <ion-card-content>
+            Dein Einkaufswagen steht Dir zu deiner Verfügung. Nutze ihn und befülle ihn mit unseren <strong>leckeren Pizzen</strong>!
+        </ion-card-content>
+    </ion-card>
+
+	<ion-list *ngIf="orderItemList">
+	    <ion-item *ngFor="let item of orderItemList" text-wrap>
+	        <ion-icon name="pizza" item-left></ion-icon>
+
+	        <h2 *ngIf="item.primary_product._id == item.secondary_product._id">
+	            {{item.primary_product.name}}
+	        </h2>
+	        <h3 *ngIf="item.primary_product._id == item.secondary_product._id">
+	            {{item.primary_product.description}}
+	        </h3>
+	        <h2 *ngIf="item.primary_product._id != item.secondary_product._id">
+	            {{item.primary_product.name}} / {{item.secondary_product.name}}
+	        </h2>
+	        <h3 *ngIf="item.primary_product._id != item.secondary_product._id">
+	            {{item.primary_product.description}} / {{item.secondary_product.description}}
+	        </h3>
+	        <button ion-button icon-left color="dark">
+                <ion-icon name="cart"></ion-icon>{{costCalculatorService.calculateOrderItemCost(item) | currency: 'EUR':true}}
+            </button>
+	        <button ion-button icon-left color="secondary">
+	            <ion-icon name="pie"></ion-icon>{{item.size}}
+	        </button>
+	        <button ion-button icon-left color="primary" *ngIf="item.primary_product._id != item.secondary_product._id">
+	            <ion-icon name="contrast"></ion-icon>Combo
+	        </button>
+	        <button ion-button icon-left color="light" *ngFor="let topping of item.toppings">
+	           <ion-icon name="nutrition"></ion-icon>{{topping.name}}
+	        </button>
+
+	        <button ion-button item-right icon-only large clear color="dark" (click)="removeCartItemTapped(item)">
+                <ion-icon name="trash"></ion-icon>
+            </button>
+            <button ion-button item-right icon-only large clear color="dark" (click)="editCartItemTapped(item)">
+                <ion-icon name="build"></ion-icon>
+            </button>
+	    </ion-item>
+	</ion-list>
+
+    <p><button ion-button outline block [disabled]="true">Zwischensumme: {{costCalculatorService.calculateTotalCost(orderItemList) | currency: 'EUR':true}}</button></p>
+
+</ion-content>

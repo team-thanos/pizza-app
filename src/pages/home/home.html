@@ -1,0 +1,30 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Pizza Service by Team Thanos (Übungsblatt D)</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="card-background-page">
+
+    <ion-card class="frontend">
+	    <div class="card-title">Ich bin Kunde und König!</div>
+	    <div class="card-subtitle">
+	       <button ion-button icon-left big (click)="browseMenuTapped()">
+	           <ion-icon name="restaurant"></ion-icon>Zur Speisekarte
+	       </button>
+	    </div>
+    </ion-card>
+
+    <ion-card class="backend">
+	    <div class="card-title">Ich bin Mitarbeiter_in und profitiere vom Mindestlohn. :-)</div>
+	    <div class="card-subtitle">
+            <button ion-button icon-left big (click)="browseStoresTapped()">
+                <ion-icon name="home"></ion-icon>Zu den Filialen
+            </button>
+            <button ion-button icon-left big color="danger" (click)="resetSystemTapped()">
+                <ion-icon name="nuclear"></ion-icon>System zurücksetzen
+            </button>
+	    </div>
+    </ion-card>
+
+</ion-content>

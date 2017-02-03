@@ -1,0 +1,45 @@
+<ion-header>
+    <ion-navbar>
+	    <ion-title>Pizza {{orderItem.primary_product.name}} lecker belegen</ion-title>
+        <ion-buttons right>
+            <button ion-button icon-only clear color="dark" (click)="saveTapped($event)">
+                <ion-icon name="checkmark"></ion-icon> Fertig
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+	<ion-list>
+
+	    <ion-item>
+			<ion-segment [(ngModel)]="formSelectedProductSizeId" (ionChange)="handleProductSizeChange($event)" mode="ios" color="primary">
+			    <ion-segment-button *ngFor="let pizzaSize of pizzaSizeList" value="{{pizzaSize.identifier}}">
+			        {{pizzaSize.label}}<span style="margin-left: 20px;">{{orderItem.primary_product["price_" + pizzaSize.identifier] | currency: 'EUR':true}}</span>
+			    </ion-segment-button>
+			</ion-segment>
+	    </ion-item>
+
+		<ion-item *ngIf="formSelectedProductSize.comboEnabled">
+		    <ion-label>Combo-Belegung?</ion-label>
+		    <ion-toggle [(ngModel)]="formComboActive"></ion-toggle>
+		</ion-item>
+
+		<ion-item *ngIf="formSelectedProductSize.comboEnabled && formComboActive">
+		    <ion-label stacked>Variation 2. Hälfte:</ion-label>
+		    <ion-select [(ngModel)]="formSecondaryProductId" cancelText="Abbrechen" okText="O.K.">
+		        <ion-option *ngFor="let product of getProductList()" value="{{product._id}}">{{product.name}} (+ {{getComboSurcharge(product) | currency: 'EUR':true}})</ion-option>
+		    </ion-select>
+		</ion-item>
+
+		<ion-item>
+		    <ion-label stacked>Toppings</ion-label>
+		    <ion-select [(ngModel)]="formToppingIdList" placeholder="Mit Toppings kannst du deine Lieblingspizza verfeinern :)" multiple="true" cancelText="Abbrechen" okText="O.K.">
+	            <ion-option *ngFor="let topping of getToppingList()" value="{{topping._id}}">{{topping.name}} (+ {{topping.price | currency: 'EUR':true}})</ion-option>
+		    </ion-select>
+		</ion-item>
+
+	</ion-list>
+
+</ion-content>

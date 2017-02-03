@@ -1,0 +1,73 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Bestellen</ion-title>
+        <ion-buttons right>
+            <button ion-button icon-only clear color="dark" [hidden]="formOrderPlaced" [disabled]="!formStore || !formPhoneNumberIsValid()" (click)="submitTapped($event)">
+                <ion-icon name="share-alt"></ion-icon> Bestellung absenden
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-card *ngIf="!formOrderPlaced">
+        <ion-card-header>#1 Bestellung überprüfen</ion-card-header>
+        <ion-card-content>
+		    <ion-list>
+		        <ion-item *ngFor="let item of orderItemList" text-wrap>
+		            <ion-icon name="pizza" item-left></ion-icon>
+		
+		            <h2 *ngIf="item.primary_product._id == item.secondary_product._id">
+		                {{item.primary_product.name}}
+		            </h2>
+		            <h3 *ngIf="item.primary_product._id == item.secondary_product._id">
+		                {{item.primary_product.description}}
+		            </h3>
+		            <h2 *ngIf="item.primary_product._id != item.secondary_product._id">
+		                {{item.primary_product.name}} / {{item.secondary_product.name}}
+		            </h2>
+		            <h3 *ngIf="item.primary_product._id != item.secondary_product._id">
+		                {{item.primary_product.description}} / {{item.secondary_product.description}}
+		            </h3>
+		            <button ion-button icon-left color="secondary">
+		                <ion-icon name="pie"></ion-icon>{{item.size}}
+		            </button>
+		            <button ion-button icon-left color="primary" *ngIf="item.primary_product._id != item.secondary_product._id">
+		                <ion-icon name="contrast"></ion-icon>Combo
+		            </button>
+		            <button ion-button icon-left color="light" *ngFor="let topping of item.toppings">
+		               <ion-icon name="nutrition"></ion-icon>{{topping.name}}
+		            </button>
+		        </ion-item>
+		    </ion-list>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card *ngIf="!formOrderPlaced">
+        <ion-card-header>#2 Persönliche Daten</ion-card-header>
+        <ion-card-content>
+            <ion-item>
+                <ion-label stacked>Deine Mobilfunk-Telefonnummer (mind. 7 Ziffern)</ion-label>
+                <ion-input [(ngModel)]="formPhoneNumber" type="tel" placeholder="0151/1234567"></ion-input>
+            </ion-item>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card *ngIf="!formOrderPlaced">
+        <ion-card-header>#3 Abholfiliale</ion-card-header>
+        <ion-card-content>
+            <ion-item>
+                <ion-label stacked>Wähle deine Traum-Filiale aus</ion-label>
+                <ion-select [(ngModel)]="formStoreId" (ionChange)="handleStoreChange()" placeholder="Noch keine Filiale ausgewählt." cancelText="Abbrechen" okText="O.K.">
+                    <ion-option *ngFor="let store of getStoreList()" value="{{store._id}}">{{store.name}}</ion-option>
+                </ion-select>
+            </ion-item>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card *ngIf="formOrderPlaced">
+        <img src="../../assets/img/thank-you.jpg">
+    </ion-card>
+
+</ion-content>

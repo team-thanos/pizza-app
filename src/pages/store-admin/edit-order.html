@@ -1,0 +1,63 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Bestellung bearbeiten</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-card *ngIf="orderCopy">
+        <ion-card-header>Eigenschaften</ion-card-header>
+        <ion-card-content>
+            <form>
+	            <ion-list>
+				    <ion-item>
+				        <ion-label stacked>Bestellung von</ion-label>
+				        <ion-input type="text" disabled="true" [(ngModel)]="orderCopy.created_by" name="phone_number"></ion-input>
+				    </ion-item>
+				    <ion-item>
+				        <ion-label stacked>Status der Bestellung</ion-label>
+				        <ion-select [(ngModel)]="orderCopy.status" name="status" (ionChange)="onChange(orderCopy)" cancelText="Abbrechen" okText="O.K.">
+				            <ion-option value="neu">Neu</ion-option>
+				            <ion-option value="backend">Backend</ion-option>
+				            <ion-option value="fertig">Fertig</ion-option>
+				        </ion-select>
+                    </ion-item>
+				</ion-list>
+			</form>
+        </ion-card-content>
+    </ion-card>
+
+	<ion-card *ngIf="order">
+	    <ion-card-header>Positionen</ion-card-header>
+	    <ion-card-content>
+			<ion-list>
+			    <ion-item *ngFor="let item of order.items" text-wrap>
+			        <ion-icon name="pizza" item-left></ion-icon>
+			        <h2 *ngIf="item.primary_product._id == item.secondary_product._id">
+                        {{item.primary_product.name}}
+			        </h2>
+                    <h3 *ngIf="item.primary_product._id == item.secondary_product._id">
+                        {{item.primary_product.description}}
+                    </h3>
+		            <h2 *ngIf="item.primary_product._id != item.secondary_product._id">
+                        {{item.primary_product.name}} / {{item.secondary_product.name}}
+                    </h2>
+                    <h3 *ngIf="item.primary_product._id != item.secondary_product._id">
+                        {{item.primary_product.description}} / {{item.secondary_product.description}}
+                    </h3>
+				    <button ion-button icon-left color="secondary">
+		                <ion-icon name="pie"></ion-icon>{{item.size}}
+		            </button>
+		            <button ion-button icon-left color="primary" *ngIf="item.primary_product._id != item.secondary_product._id">
+                        <ion-icon name="contrast"></ion-icon>Combo
+                    </button>
+				    <button ion-button icon-left color="light" *ngFor="let topping of item.toppings">
+			           <ion-icon name="nutrition"></ion-icon>{{topping.name}}
+		            </button>
+			    </ion-item>
+			</ion-list>
+	    </ion-card-content>
+	</ion-card>
+
+</ion-content>

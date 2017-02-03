@@ -1,0 +1,14 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Filiale auswählen</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-list>
+        <button ion-item *ngFor="let store of getStoreList()" (click)="storeTapped(store)">
+            <ion-icon name="home" item-left></ion-icon>
+            {{store.name}}
+        </button>
+    </ion-list>
+</ion-content>

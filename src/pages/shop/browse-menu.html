@@ -1,0 +1,26 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Speisekarte</ion-title>
+        <ion-buttons right>
+            <button ion-button icon-only clear color="dark" (click)="browseCartTapped($event)">
+                <ion-icon name="cart"></ion-icon> Einkaufswagen
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+	<ion-list inset>
+	    <ion-item *ngFor="let pizza of getProductList()">
+	        <ion-icon name="pizza" item-left></ion-icon>
+	        <ion-badge color="light" item-right>{{pizza.price_s}}</ion-badge>
+	        <ion-badge color="light" item-right>{{pizza.price_l}}</ion-badge>
+	        <ion-badge color="light" item-right>{{pizza.price_xl}}</ion-badge>
+	        <button ion-button item-right icon-only large clear (click)="addToCartTapped(pizza)">
+	            <ion-icon name="add-circle"></ion-icon>
+	        </button>
+	        <h2>{{pizza.name}}</h2>
+	        <p>{{pizza.description}}</p>
+	    </ion-item>
+	</ion-list>
+</ion-content>
