@@ -1,9 +1,13 @@
 <ion-header>
-    <ion-navbar>
-        <ion-title>Bestellen</ion-title>
+    <ion-navbar [hideBackButton]="formOrderPlaced">
+        <ion-title *ngIf="!formOrderPlaced">Bestellen</ion-title>
+        <ion-title *ngIf="formOrderPlaced">Bis bald!</ion-title>
         <ion-buttons right>
             <button ion-button icon-only clear color="dark" [hidden]="formOrderPlaced" [disabled]="!formStore || !formPhoneNumberIsValid()" (click)="submitTapped($event)">
                 <ion-icon name="share-alt"></ion-icon> Bestellung absenden
+            </button>
+            <button ion-button icon-only clear color="dark" [hidden]="!formOrderPlaced" (click)="showCartTapped($event)">
+                <ion-icon name="restaurant"></ion-icon> Zurück zur Speisekarte
             </button>
         </ion-buttons>
     </ion-navbar>
@@ -17,7 +21,7 @@
 		    <ion-list>
 		        <ion-item *ngFor="let item of orderItemList" text-wrap>
 		            <ion-icon name="pizza" item-left></ion-icon>
-		
+
 		            <h2 *ngIf="item.primary_product._id == item.secondary_product._id">
 		                {{item.primary_product.name}}
 		            </h2>

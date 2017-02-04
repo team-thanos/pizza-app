@@ -94,10 +94,19 @@ export class CheckoutPage {
         this.orderService.create(order).subscribe(
             order => {
                 this.formOrderPlaced = true;
+                this.shoppingCartService.clear();
                 loadingIndicator.dismiss();
             },
             error => console.log(error)
         );
+    }
+
+    /**
+     * Handler invoked when the user clicks the "Zurück zur Speisekarte" button
+     */
+    public showCartTapped() : void {
+        this.navCtrl.pop({animate: false});
+        this.navCtrl.pop({animate: false});
     }
 
     /**

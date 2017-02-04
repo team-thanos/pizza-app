@@ -18,7 +18,7 @@
 				    <ion-item>
 				        <ion-label stacked>Status der Bestellung</ion-label>
 				        <ion-select [(ngModel)]="orderCopy.status" name="status" (ionChange)="onChange(orderCopy)" cancelText="Abbrechen" okText="O.K.">
-				            <ion-option value="neu">Neu</ion-option>
+				            <ion-option value="neu" [disabled]="orderCopy.status != 'neu'">Neu</ion-option>
 				            <ion-option value="backend">Backend</ion-option>
 				            <ion-option value="fertig">Fertig</ion-option>
 				        </ion-select>
