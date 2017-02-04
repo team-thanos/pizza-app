@@ -4,9 +4,15 @@ import { OrderItem } from '../models/order-item';
 
 import * as lodash from 'lodash';
 
+/**
+ * A service for calculating the cost of orders and order items.
+ */
 @Injectable()
 export class CostCalculatorService {
 
+    /**
+     * Calculates the cost of all order items in the shopping cart.
+     */
     public calculateTotalCost(orderItemList: OrderItem[]) : number {
 
         let totalCost = 0;
@@ -15,6 +21,9 @@ export class CostCalculatorService {
         return totalCost;
     }
 
+    /**
+     * Calculates the cost of a single order item.
+     */
     public calculateOrderItemCost(orderItem: OrderItem) : number {
 
         let productPriceField = "price_" + orderItem.size;
