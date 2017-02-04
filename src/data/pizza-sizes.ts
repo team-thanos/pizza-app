@@ -1,5 +1,8 @@
 import { PizzaSize } from '../models/pizza-size';
 
+/**
+ * Static configuration for available pizza sizes.
+ */
 var size_s  = new PizzaSize("s" , "S" , false, 2);
 var size_l  = new PizzaSize("l" , "L" , true , 3);
 var size_xl = new PizzaSize("xl", "XL", true , 5);
