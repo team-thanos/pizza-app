@@ -34,7 +34,7 @@ export class ShoppingCartService {
     }
 
     /**
-     * Removes an order item from basket.  
+     * Removes an order item from the basket.  
      */
     public remove(orderItem: OrderItem) : void {
         lodash.remove(this.orderItemList, ['created_at', orderItem.created_at]);
