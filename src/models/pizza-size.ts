@@ -18,7 +18,7 @@ export class PizzaSize {
     /**
      * The maximum number of toppings allowed for a pizza of this size
      */
-    private maximumNumberOfToppings: number;
+    public maximumNumberOfToppings: number;
 
     constructor(identifier: string, label: String, comboEnabled: boolean, maximumNumberOfToppings: number) {
         this.identifier = identifier;

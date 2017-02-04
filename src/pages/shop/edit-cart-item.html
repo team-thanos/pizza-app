@@ -2,7 +2,7 @@
     <ion-navbar>
 	    <ion-title>Pizza {{orderItem.primary_product.name}} lecker belegen</ion-title>
         <ion-buttons right>
-            <button ion-button icon-only clear color="dark" (click)="saveTapped($event)">
+            <button ion-button icon-only clear color="dark" [disabled]="numToppingsExceeded()" (click)="saveTapped($event)">
                 <ion-icon name="checkmark"></ion-icon> Fertig
             </button>
         </ion-buttons>
@@ -10,6 +10,17 @@
 </ion-header>
 
 <ion-content padding>
+
+    <ion-card *ngIf="numToppingsExceeded()">
+        <ion-card-header>Du hast die maximale Anzahl zulässiger Toppings für die ausgewählte Pizza-Größe überschritten. Wähle bis zu</ion-card-header>
+        <ion-card-content>
+	        <ul>
+	            <li><strong>2</strong> Toppings für Pizzen der Größe <strong>S</strong></li>
+	            <li><strong>3</strong> Toppings für Pizzen der Größe <strong>L</strong></li>
+	            <li><strong>5</strong> Toppings für Pizzen der Größe <strong>XL</strong></li>
+	        </ul>
+        </ion-card-content>
+    </ion-card>
 
 	<ion-list>
 

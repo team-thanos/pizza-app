@@ -161,6 +161,13 @@ export class EditCartItemPage {
     }
 
     /**
+     * Returns true if the number of toppings chosen exceed the maximum number of allowed toppings for the selected pizza size.
+     */
+    public numToppingsExceeded() : boolean {
+        return (this.formToppingIdList.length > this.formSelectedProductSize.maximumNumberOfToppings);
+    }
+
+    /**
      * Creates an interim order item from current form input
      */
     public getInterimOrderItem() : OrderItem {
