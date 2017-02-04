@@ -8,6 +8,8 @@ import 'rxjs/add/operator/catch';
 
 import { Store } from '../models/store';
 
+import { API_URL } from '../config.ts';
+
 /**
  * A service for dealing with stores.
  */
@@ -24,7 +26,7 @@ export class StoreService {
      * Retrieves a list of stores from the API.
      */
     public getList(): Observable<Store[]> {
-        return this.http.get("http://192.168.2.105:3000/api/store")
+        return this.http.get(API_URL + "/api/store")
             .map((response: Response) => response.json())
             .catch((error:any) => Observable.throw(error.json().error || error + 'Server error'));
     }

@@ -8,6 +8,8 @@ import 'rxjs/add/operator/catch';
 
 import { Order } from '../models/order';
 
+import { API_URL } from '../config.ts';
+
 /**
  * A service for managing orders.
  */
@@ -24,7 +26,7 @@ export class OrderService {
      * Retrieves the list of all orders from the API.
      */
     public getList(): Observable<Order[]> {
-        return this.http.get("http://192.168.2.105:3000/api/list-orders")
+        return this.http.get(API_URL + "/api/list-orders")
             .map((response: Response) => response.json())
             .catch((error:any) => Observable.throw(error.json().error || error + 'Server error'));
     }
@@ -38,7 +40,7 @@ export class OrderService {
         });
         let options = new RequestOptions({ headers: headers });
 
-        return this.http.post("http://192.168.2.105:3000/api/order", order, options)
+        return this.http.post(API_URL + "/api/order", order, options)
             .map((res:Response) => res.json())
             .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
     }
@@ -52,7 +54,7 @@ export class OrderService {
         });
         let options = new RequestOptions({ headers: headers });
 
-        return this.http.put(`http://192.168.2.105:3000/api/order/${order._id}`, order, options)
+        return this.http.put(API_URL + `/api/order/${order._id}`, order, options)
             .map((res:Response) => res.json())
             .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
     }   

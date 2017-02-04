@@ -8,6 +8,8 @@ import 'rxjs/add/operator/catch';
 
 import { Pizza } from '../models/pizza';
 
+import { API_URL } from '../config.ts';
+
 /**
  * A service for dealing with products (pizza).
  */
@@ -24,7 +26,7 @@ export class PizzaService {
      * Retrieves a list of purchasable products from the API.
      */
     public getList(): Observable<Pizza[]> {
-        return this.http.get("http://192.168.2.105:3000/api/product")
+        return this.http.get(API_URL + "/api/product")
             .map((response: Response) => response.json())
             .catch((error:any) => Observable.throw(error.json().error || error + 'Server error'));
     }

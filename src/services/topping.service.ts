@@ -8,6 +8,8 @@ import 'rxjs/add/operator/catch';
 
 import { Topping } from '../models/topping';
 
+import { API_URL } from '../config.ts';
+
 /**
  * A service for dealing with toppings.
  */
@@ -24,7 +26,7 @@ export class ToppingService {
      * Retrieves a list of toppings from the API.
      */
     public getList(): Observable<Topping[]> {
-        return this.http.get("http://192.168.2.105:3000/api/topping")
+        return this.http.get(API_URL + "/api/topping")
             .map((response: Response) => response.json())
             .catch((error:any) => Observable.throw(error.json().error || error + 'Server error'));
     }
