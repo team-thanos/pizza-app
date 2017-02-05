@@ -34,8 +34,48 @@ export class OrderItem {
         this.secondary_product = primary_product;
     }
 
+    public getCreatedAt() : number {
+        return this.created_at;
+    }
+
+    public setCreatedAt(createdAt: number) : OrderItem {
+        this.created_at = createdAt;
+        return this;
+    }
+
+    public getPrimaryProduct() : Pizza {
+        return this.primary_product;
+    }
+
+    public setPrimaryProduct(primaryProduct: Pizza) : OrderItem {
+        this.primary_product = primaryProduct;
+        return this;
+    }
+
+    public getSecondaryProduct() : Pizza {
+        return this.secondary_product;
+    }
+
+    public setSecondaryProduct(secondaryProduct: Pizza) : OrderItem {
+        this.secondary_product = secondaryProduct;
+        return this;
+    }
+
+    public getSize() : string {
+        return this.size;
+    }
+
     public setSize(size: string): OrderItem {
         this.size = size;
+        return this;
+    }
+
+    public getToppingList() : Topping[] {
+        return this.toppings;
+    }
+
+    public setToppingList(toppingList: Topping[]) : OrderItem {
+        this.toppings = toppingList;
         return this;
     }
 }

@@ -5,6 +5,7 @@ import { Order }     from '../../models/order';
 import { OrderItem } from '../../models/order-item';
 import { Store }     from '../../models/store';
 
+import { CostCalculatorService } from '../../services/cost-calculator.service';
 import { OrderService }        from '../../services/order.service';
 import { ShoppingCartService } from '../../services/shopping-cart.service';
 import { StoreService }        from '../../services/store.service';
@@ -14,7 +15,7 @@ import * as lodash from 'lodash';
 @Component({
   selector   : 'page-checkout',
   templateUrl: 'checkout.html',
-  providers  : [OrderService, ShoppingCartService, StoreService]
+  providers  : [CostCalculatorService, OrderService, ShoppingCartService, StoreService]
 })
 export class CheckoutPage {
 
@@ -48,6 +49,7 @@ export class CheckoutPage {
     constructor(
         private loadingCtrl: LoadingController,
         private navCtrl: NavController,
+        private costCalculatorService: CostCalculatorService,
         private shoppingCartService: ShoppingCartService,
         private orderService: OrderService,
         private storeService: StoreService

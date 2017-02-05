@@ -34,6 +34,9 @@
 		            <h3 *ngIf="item.primary_product._id != item.secondary_product._id">
 		                {{item.primary_product.description}} / {{item.secondary_product.description}}
 		            </h3>
+		            <button ion-button icon-left color="dark">
+                        <ion-icon name="cart"></ion-icon>{{costCalculatorService.calculateOrderItemCost(item) | currency: 'EUR':true}}
+                    </button>
 		            <button ion-button icon-left color="secondary">
 		                <ion-icon name="pie"></ion-icon>{{item.size}}
 		            </button>
@@ -45,6 +48,7 @@
 		            </button>
 		        </ion-item>
 		    </ion-list>
+		    <p><button ion-button outline block [disabled]="true">Gesamtbetrag: {{costCalculatorService.calculateTotalCost(orderItemList) | currency: 'EUR':true}}</button></p>
         </ion-card-content>
     </ion-card>
 
